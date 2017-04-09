@@ -28,8 +28,6 @@
         <property name="servletContext" value="/WEB-INF/views/"/>
     </bean>
 
-
-
     <bean id="htmlViewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="suffix" value=".html" />
