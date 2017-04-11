@@ -1,1 +1,2 @@
-main\manage\controller\TestController.class
+Util\JsonUtil.class
+controller\TestController.class

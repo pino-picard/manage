@@ -20,7 +20,7 @@
     </listener>
 
     <welcome-file-list>
-        <welcome-file>/view/index.html</welcome-file>
+        <welcome-file>/view/views/index.html</welcome-file>
     </welcome-file-list>
 
     <!--定义DispatcherServlet-->

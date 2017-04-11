@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link href="view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="myNoteApp" ng-controller="myNoteCtrl">
+    <div style="'width:100%'" class="container-fluid">
+        <div class="row clearfix">
+            <div ng-include="'view/component/headbar.html'"></div>
+        </div>
+        <div class="row clearfix">
+            <div ng-include="'view/component/sidebar.html'"></div>
+            <div ng-include="'view/component/screen.html'"></div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="view/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="view/js/myNoteApp.js"></script>
+    <script src="view/js/myNoteCtrl.js"></script>
+</body>
+</html>
