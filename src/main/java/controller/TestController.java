@@ -1,5 +1,7 @@
 package controller;
 
+import Util.JsonUtil;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ public class TestController {
     @ResponseBody
     public String test (HttpServletRequest request, HttpServletResponse response,@RequestBody String requestBody) {
         System.out.println(requestBody);
-        return "{\"data\":\"Hello World!\"}";
+        JSONObject object = new JSONObject();
+        object.put("data","Hello Pino!");
+        return JsonUtil.toJson(object);
     }
 }
