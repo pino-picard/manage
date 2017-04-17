@@ -16,7 +16,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <list>
-                <value>entity</value>
+                <value>dao.entity</value>
             </list>
         </property>
         <property name="hibernateProperties">
