@@ -5,9 +5,12 @@ app.controller("myNoteCtrl", ['$scope', '$location', "$http", function($scope, $
     $scope.hello = "empty";
 
     var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/test";
-    $http.get(url).success(function (response) {
-        $scope.hello = response.data;
-    }).error(function () {
-        $scope.hello = "error";
-    });
+    $http.get(url).then(
+        function successCallback(response) {
+            $scope.hello = response.data;
+        },
+        function errorCallback(response) {
+            $scope.hello = "error";
+        }
+    );
 }]);

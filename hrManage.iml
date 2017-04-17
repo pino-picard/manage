@@ -23,6 +23,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
           <root url="file://$MODULE_DIR$/src/main/resources" relative="/resources" />
+          <root url="file://$MODULE_DIR$/node_modules" relative="/npm" />
         </webroots>
         <sourceRoots />
       </configuration>

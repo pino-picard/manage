@@ -6,19 +6,19 @@
             </div>
             <div id="panel-element-1" class="panel-collapse in">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">员工管理</button>
+                    <a href="#/personal-employeeManage">员工管理</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">员工异动</button>
+                    <a href="#/personal-employeeChange">员工异动</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">异动申请</button>
+                    <a href="#/personal-changeApproval">异动申请</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">异动审批</button>
+                    <a href="#/personal-changeApply">异动审批</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">我的异动</button>
+                    <a href="#/personal-myChange">我的异动</a>
                 </div>
             </div>
         </div>
@@ -28,16 +28,16 @@
             </div>
             <div id="panel-element-2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">全部招聘</button>
+                    <a href="#/recruitment-allRecruitment">全部招聘</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">招聘申请</button>
+                    <a href="#/recruitment-recruitmentApply">招聘申请</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">我的招聘</button>
+                    <a href="#/recruitment-myRecruitment">我的招聘</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">招聘审批</button>
+                    <a href="#/recruitment-recruitmentApproval">招聘审批</a>
                 </div>
             </div>
         </div>
@@ -47,16 +47,16 @@
             </div>
             <div id="panel-element-3" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">用户管理</button>
+                    <a href="#/system-userManage">用户管理</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">角色管理</button>
+                    <a href="#/system-roleManage">角色管理</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">模块管理</button>
+                    <a href="#/system-modelManage">模块管理</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">系统日志</button>
+                    <a href="#/system-systemLog">系统日志</a>
                 </div>
             </div>
         </div>
@@ -66,16 +66,16 @@
             </div>
             <div id="panel-element-4" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">我的招聘</button>
+                    <a href="#/office-myRecruitment">我的招聘</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">招聘审批</button>
+                    <a href="#/office-recruitmentApproval">招聘审批</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">请假审批</button>
+                    <a href="#/office-leaveApproval">请假审批</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">异动审批</button>
+                    <a href="#/office-changeApproval">异动审批</a>
                 </div>
             </div>
         </div>
@@ -85,18 +85,21 @@
             </div>
             <div id="panel-element-5" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">请假管理</button>
+                    <a href="#/attendance-leave">请假管理</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">我的请假</button>
+                    <a href="#/attendance-myLeave">我的请假</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">请假申请</button>
+                    <a href="#/attendance-leaveApply">请假申请</a>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default btn-link" ng-click="router()">请假审批</button>
+                    <a href="#/attendance-leaveApproval">请假审批</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="col-lg-10 column">
+    <div ng-view></div>
 </div>
