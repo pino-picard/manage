@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by caoxiao on 2017/4/16.
  */
-@Entity
+@Entity(name = "department")
 public class DepartmentEntity implements Serializable{
     private static final long serialVersionUID = 1L;
 

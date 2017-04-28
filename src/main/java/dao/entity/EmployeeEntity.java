@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by caoxiao on 2017/4/16.
  */
-@Entity
+@Entity(name = "employee")
 public class EmployeeEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
