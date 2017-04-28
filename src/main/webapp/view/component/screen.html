@@ -1,4 +1,4 @@
-<div class="col-lg-10 column">
+<div class="col-lg-12 column">
     <div class="jumbotron">
         <div class="tabbable" id="tabs-92845">
             <ul class="nav nav-tabs">
@@ -14,11 +14,17 @@
                     <p>
                         百度部门列表.
                     </p>
+                    <div ng-conrtoller="companyTreeController">
+                        <div company-tree tree-data="dataTree"></div>
+                    </div>
                 </div>
                 <div class="tab-pane" id="panel-2">
                     <p>
                         阿里部门列表.
                     </p>
+                    <div ng-conrtoller="companyTreeController">
+                        <company-tree tree-data="dataTree"></company-tree>
+                    </div>
                 </div>
             </div>
         </div>

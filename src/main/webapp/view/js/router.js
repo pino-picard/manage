@@ -129,9 +129,16 @@ app.config(['$routeProvider',function ($routeProvider) {
                 templateUrl:'view/views/system/userManage.html'
             }
         )
+        .when(
+            '/create-info',
+            {
+                templateUrl:'view/views/createInfo/html'
+            }
+        )
         .otherwise(
             {
-                templateUrl:'view/component/screen.html'
+                templateUrl:'view/component/screen.html',
+                controller:'companyTreeController'
             }
         );
 }]);

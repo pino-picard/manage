@@ -137,3 +137,90 @@ app.config(['$routeProvider',function ($routeProvider) {
             }
         );
 }]);
+
+app.directive("companyTree",function () {
+    return {
+        restrict : "EA",
+        replace : true,
+        templateUrl : "view/template/companyTree.html",
+        scope : {
+            treeData : "="
+        },
+        controller : "companyTreeController"
+    };
+});
+
+app.controller("companyTreeController", function ($scope) {
+    $scope.treeData = {
+        name : "Root部门",
+        hasChildDepart : true,
+        hasPerson : true,
+        department : [
+            {
+                name: "测试部门",
+                hasChildDepart : false,
+                hasPerson : true,
+                department: {
+
+                },
+                person : [
+                    {
+                        name : "赵必伟"
+                    },
+                    {
+                        name : "周竞帆"
+                    },
+                    {
+                        name : "小叔叔"
+                    }
+                ]
+            },
+            {
+                name: "中心研发部",
+                hasChildDepart : true,
+                hasPerson : true,
+                department: [
+                    {
+                        name: "基础研发部",
+                        hasChildDepart : false,
+                        hasPerson : true,
+                        department: [],
+                        person : [
+                            {
+                                name : "张三"
+                            },
+                            {
+                                name : "李四"
+                            },
+                            {
+                                name : "王五"
+                            }
+                        ]
+                    }
+                ],
+                person : [
+                    {
+                        name : "AA"
+                    },
+                    {
+                        name : "BB"
+                    },
+                    {
+                        name : "CC"
+                    }
+                ]
+            }
+        ],
+        person : [
+            {
+                name : "萨瓦迪卡"
+            },
+            {
+                name : "萨瓦兰奇"
+            },
+            {
+                name : "萨顶顶"
+            }
+        ]
+    }
+});

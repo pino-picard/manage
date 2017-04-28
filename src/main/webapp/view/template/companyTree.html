@@ -1,13 +1,21 @@
-<div class="panel panel-default" ng-model="treeData">
+<div class="panel panel-default" >
     <div class="panel-heading">
         <a class="panel-title" data-toggle="collapse" href="'#panel-element-' + {{treeData.name}}">{{treeData.name}}</a>
     </div>
-    <div id="'#panel-element-' + {{treeData.name}}" class="panel-collapse in" ng-repeat="depart in treeData.department">
-        <div class="panel-body" ng-if="depart.hasChildDepart">
-            <company-tree tree-data="depart.department"></company-tree>
+    <div id="'#panel-element-' + {{treeData.name}}" class="panel-collapse in">
+        <div ng-if="treeData.hasChildDepart">
+            <div ng-repeat="depart in treeData.department">
+                <div class="panel-body">
+                    <div ng-include="'view/template/companyTree.html'" ng-init="treeData = depart"></div>
+                </div>
+            </div>
         </div>
-        <div ng-repeat="person in depart.person" ng-if="depart.hasPerson">
-            <div class="panel-body" ng-modle="person">{{person.name}}</div>
+        <div ng-if="treeData.hasPerson">
+            <div ng-repeat="person in treeData.person">
+                <div class="panel-body">
+                    <div>{{person.name}}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
