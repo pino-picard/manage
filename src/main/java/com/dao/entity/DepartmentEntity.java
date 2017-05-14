@@ -1,4 +1,4 @@
-package dao.entity;
+package com.dao.entity;
 
 import org.hibernate.annotations.Cascade;
 
@@ -23,9 +23,8 @@ public class DepartmentEntity implements Serializable{
     @Column(name = "parent_id")
     private String parentId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-    private CompanyEntity companyEntity;
+    @Column(name = "company_id")
+    private String companyId;
 
     @Column(name = "description")
     private String description;
@@ -54,12 +53,12 @@ public class DepartmentEntity implements Serializable{
         this.parentId = parentId;
     }
 
-    public CompanyEntity getCompanyEntity() {
-        return companyEntity;
+    public String getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyEntity(CompanyEntity CompanyEntity) {
-        this.companyEntity = CompanyEntity;
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public String getDescription() {

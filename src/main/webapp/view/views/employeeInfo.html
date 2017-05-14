@@ -1,0 +1,197 @@
+<div class="col-lg-7 column" ng-controller="employeeController">
+    <form role="form" class="form-horizontal">
+        <fieldset>
+            <legend>个人信息</legend>
+        </fieldset>
+        <div class="form-group">
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">姓名:</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="name" ng-model="employee.name"/>
+            </div>
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">性别:</label>
+            <div class="col-lg-4" style="font-size: 16px;margin-top: 5px">
+                <input name="sex" style="height: 18px;width: 18px;margin-top: 2px" ng-model="employee.sex" value="male" type="radio" class="col-lg-1 form-control"/>
+                <label class="col-lg-4" style="margin-right: 10px">男</label>
+                <input name="sex" style="height: 18px;width: 18px;margin-top: 2px" ng-model="employee.sex" value="female" type="radio" class="col-lg-1 form-control"/>
+                <label class="col-lg-4" style="margin-right: 10px">女</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">生日:</label>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="birthday" ng-model="employee.birthday">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-calendar birthday_datetime"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">学校:</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="school" ng-model="employee.school"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">学历:</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="education" ng-model="employee.education"/>
+            </div>
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">专业:</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="specialty" ng-model="employee.specialty"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">电话:</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="telNum" ng-model="employee.telNum"/>
+            </div>
+            <div class="col-lg-1"></div>
+            <label class="col-lg-1" style="font-size: 16px;margin-top: 5px">邮箱:</label>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input ng-model="email.first" ng-change="changeEmail()" type="text" class="form-control" placeholder="email" aria-describedby="basic-addon1" />
+                    <span class="input-group-addon" id="basic-addon1" style="padding-right: 1px;padding-left: 1px">@</span>
+                    <input ng-model="email.second" ng-change="changeEmail()" type="text" class="form-control" aria-describedby="basic-addon2" />
+                    <span class="input-group-addon" id="basic-addon2" style="padding-right: 1px;padding-left: 1px">.</span>
+                    <input ng-model="email.third" ng-change="changeEmail()" type="text" class="form-control" aria-describedby="basic-addon2" />
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>工作经历</legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">起止时间:</label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="work_startTime" ng-model="employee.workStartTime"/>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default glyphicon glyphicon-calendar work_startTime"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"><label style="font-size: 16px;margin-top: 5px">——</label></div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="work_endTime" ng-model="employee.workEndTime">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default glyphicon glyphicon-calendar work_endTime"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">企业名称:</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="companyName" ng-model="employee.companyName"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">所在部门:</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="departmentName" ng-model="employee.departmentName"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">职位名称:</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="jobName" ng-model="employee.jobName"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">工作描述:</label>
+                <div class="col-lg-9">
+                    <textarea style="height: 150px" class="form-control" id="jobDescription" ng-model="employee.jobDescription"></textarea>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>项目经历</legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">起止时间:</label>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="project_startTime" ng-model="employee.projectStartTime">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default glyphicon glyphicon-calendar project_startTime"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"><label style="font-size: 16px;margin-top: 5px">——</label></div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="project_endTime" ng-model="employee.projectEndTime">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default glyphicon glyphicon-calendar project_endTime"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">项目名称:</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="projectName" ng-model="employee.projectName"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">项目描述:</label>
+                <div class="col-lg-9">
+                    <textarea style="height: 150px" class="form-control" id="projectDescription" ng-model="employee.projectDescription"></textarea>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>语言能力</legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">语言描述:</label>
+                <div class="col-lg-9">
+                    <textarea style="height: 150px" class="form-control" id="languageDescription" ng-model="employee.languageDescription"></textarea>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>专业能力</legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">技能描述:</label>
+                <div class="col-lg-9">
+                    <textarea style="height: 150px" class="form-control" id="skillDescription" ng-model="employee.skillDescription"></textarea>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>简历上传</legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-10" style="padding-left: 0px">
+                <label class="col-lg-2" style="font-size: 16px;margin-top: 5px">文件上传:</label>
+                <input type="file" id="inputFile" ng-model="employee.file"/>
+            </div>
+        </div>
+        <div style="height: 50px"></div>
+        <button type="submit" class="btn btn-primary pull-right btn-lg" ng-click="submitForm()">提交</button>
+        <div style="height: 100px"></div>
+    </form>
+</div>

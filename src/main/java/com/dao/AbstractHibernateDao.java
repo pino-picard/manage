@@ -1,6 +1,7 @@
-package dao.impl;
+package com.dao;
 
 import org.hibernate.*;
+
 import javax.annotation.Resource;
 import javax.persistence.GeneratedValue;
 import java.io.Serializable;
@@ -118,7 +119,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
         return entity;
     }
 
-    public  T updateWithoutTransaction(Session session, final T entity) {
+    public T updateWithoutTransaction(Session session, final T entity) {
         try {
             session.update(entity);
         } catch (Exception e) {
@@ -129,9 +130,8 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
         return entity;
     }
 
-    
-    
-    public  void create(final T entity) {
+
+    public void create(final T entity) {
         Session session = openSession();
         try {
             session.beginTransaction();

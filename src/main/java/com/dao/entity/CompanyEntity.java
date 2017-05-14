@@ -1,4 +1,4 @@
-package dao.entity;
+package com.dao.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,6 +1,6 @@
-package dao.impl;
+package com.dao;
 
-import dao.entity.EmployeeEntity;
+import com.dao.entity.EmployeeEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-<div class="col-lg-12 column">
+<div class="col-lg-12 column" ng-controller="myNoteCtrl">
     <div class="jumbotron">
         <div class="tabbable" id="tabs-92845">
             <ul class="nav nav-tabs">
@@ -14,16 +14,16 @@
                     <p>
                         百度部门列表.
                     </p>
-                    <div ng-conrtoller="companyTreeController">
-                        <div company-tree tree-data="dataTree"></div>
+                    <div>
+                        <abn-tree tree-data="treeData" tree-control="my_tree" expand-level="2" icon-leaf="glyphicon glyphicon-user" icon-expand="glyphicon glyphicon-triangle-right" icon-collapse="glyphicon glyphicon-triangle-bottom"></abn-tree>
                     </div>
                 </div>
                 <div class="tab-pane" id="panel-2">
                     <p>
                         阿里部门列表.
                     </p>
-                    <div ng-conrtoller="companyTreeController">
-                        <company-tree tree-data="dataTree"></company-tree>
+                    <div>
+                        <abn-tree tree-data="treeData"></abn-tree>
                     </div>
                 </div>
             </div>

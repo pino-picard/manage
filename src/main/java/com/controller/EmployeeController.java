@@ -1,22 +1,22 @@
-package controller;
+package com.controller;
 
-import Util.JsonUtil;
-import Util.ResponseInfo;
+import com.Util.JsonUtil;
+import com.Util.ResponseInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import dao.entity.EmployeeEntity;
-import net.sf.json.JSONArray;
+import com.model.EmployeeModel;
+import com.service.EmployeeService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.EmployeeService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by caoxiao on 2017/5/9.
  */
+@Controller
 public class EmployeeController {
 
     @Resource
@@ -42,17 +42,18 @@ public class EmployeeController {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode node = mapper.createArrayNode();
         ObjectNode test = mapper.createObjectNode();
-        node.add(test);
-        responseInfo.createSuccessResponse(node);
 
-        EmployeeEntity newEmployee = new EmployeeEntity();
+        EmployeeModel newEmployee;
         try {
-            newEmployee = mapper.readValue(requestStr,EmployeeEntity.class);
+            newEmployee = mapper.readValue(requestStr, EmployeeModel.class);
         } catch (IOException e) {
             responseInfo.createFailedResponse("", e.getMessage());
             return JsonUtil.toJson(responseInfo);
         }
 
+        if (newEmployee != null) {
+            employeeService.addEmployee(newEmployee);
+        }
 
         return JsonUtil.toJson(responseInfo);
     }

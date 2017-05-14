@@ -1,4 +1,4 @@
-package dao.entity;
+package com.dao.entity;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -9,6 +9,7 @@ import java.io.Serializable;
 /**
  * Created by caoxi on 2017/4/28.
  */
+@Entity(name = "user")
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,7 +17,7 @@ public class UserEntity implements Serializable {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userId;
+    private Long userId;
 
     @Column(name = "user_name", unique = true, length = 30)
     private String userName;
