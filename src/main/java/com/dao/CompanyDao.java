@@ -1,16 +1,12 @@
 package com.dao;
 
 import com.dao.entity.CompanyEntity;
-import com.dao.entity.DepartmentEntity;
-import com.dao.entity.EmployeeEntity;
 import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
