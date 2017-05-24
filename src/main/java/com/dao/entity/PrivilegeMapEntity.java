@@ -16,5 +16,5 @@ public class PrivilegeMapEntity implements Serializable {
     private Long mapId;
 
     @Column(name = "page_num")
-    private Integer pageNum;
+    private String pageNum;
 }

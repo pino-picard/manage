@@ -25,7 +25,7 @@ public class CompanyEntity implements Serializable {
     @Column(name = "industry")
     private String industry;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition="TEXT")
     private String description;
 
     public Long getCompanyId() {

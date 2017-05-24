@@ -59,7 +59,7 @@ public class EmployeeEntity implements Serializable{
     @Column(name = "job_name")
     private String jobName;
 
-    @Column(name = "job_description")
+    @Column(name = "job_description", columnDefinition="TEXT")
     private String jobDescription;
 
     @Column(name = "project_startTime")
@@ -71,13 +71,13 @@ public class EmployeeEntity implements Serializable{
     @Column(name = "project_name")
     private String projectName;
 
-    @Column(name = "project_description")
+    @Column(name = "project_description", columnDefinition="TEXT")
     private String projectDescription;
 
-    @Column(name = "language_description")
+    @Column(name = "language_description", columnDefinition="TEXT")
     private String languageDescription;
 
-    @Column(name = "skill_description")
+    @Column(name = "skill_description", columnDefinition="TEXT")
     private String skillDescription;
 
     @Column(name = "employee_state")
@@ -91,6 +91,9 @@ public class EmployeeEntity implements Serializable{
 
     @Column(name = "company_id")
     private String companyId;
+
+    @Column(name = "recruit_id")
+    private String recruitId;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -298,5 +301,13 @@ public class EmployeeEntity implements Serializable{
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
+    }
+
+    public String getRecruitId() {
+        return recruitId;
+    }
+
+    public void setRecruitId(String recruitId) {
+        this.recruitId = recruitId;
     }
 }

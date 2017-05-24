@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <script src="/manage/npm/jquery/dist/jquery.js"></script>
+    <link href="/manage/view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/manage/view/css/signUp.css" rel="stylesheet">
+    <link href="/manage/view/js/directives/abn_tree.css" rel="stylesheet" type="text/css"/>
+    <link href="/manage/npm/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/manage/view/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/manage/npm/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/manage/npm/angular/angular.js"></script>
+    <script src="/manage/npm/angular-route/angular-route.js"></script>
+</head>
+<body ng-app="manageApp" ng-controller="registerController">
+<div style="'width:100%'" class="container-fluid">
+    <form class="form-signup">
+        <h2 class="">注 册</h2>
+        <label for="username" class="">用户名</label>
+        <input type="text" ng-model="username" id="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="">密码</label>
+        <input type="password" ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="repeatPassword" class="">重复密码</label>
+        <input type="password" ng-model="repeatPassword" id="repeatPassword" class="form-control" placeholder="repeatPassword" required>
+        <label for="email" class="">邮箱</label>
+        <input type="email" ng-model="email" id="email" class="form-control" placeholder="email" required>
+        <label for="mobile" class="">手机</label>
+        <input type="text" ng-model="mobile" id="mobile" class="form-control" placeholder="mobile" required>
+        <label for="nickname" class="">昵称</label>
+        <input type="text" ng-model="nickname" id="nickname" class="form-control" placeholder="nickname" required>
+
+        <p class="bg-danger" ng-show="errorInfo != ''">{{errorInfo}}</p>
+        <button class="btn btn-lg btn-info btn-block" ng-click="addUser()">注 册</button>
+    </form>
+</div>
+
+<script src="/manage/view/js/manageApp.js"></script>
+<script src="/manage/view/js/loginController.js"></script>
+</body>
+</html>

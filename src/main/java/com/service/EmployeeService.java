@@ -11,6 +11,7 @@ import com.model.EmployeeModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by caoxiao on 2017/5/9.
@@ -57,6 +58,11 @@ public class EmployeeService {
         employeeDao.create(employeeEntity);
     }
 
+    public List<EmployeeEntity> getEmployees (String employeeName,String company,String department,String telNum,String recruitId) {
+        List<EmployeeEntity> targetList = employeeDao.describeEmployee(employeeName,company,department,telNum,recruitId);
+
+        return targetList;
+    }
 
 
     private EmployeeEntity transformModelToEntity (EmployeeModel employeeModel) {

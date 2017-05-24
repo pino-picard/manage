@@ -2,6 +2,7 @@ package com.controller;
 
 import com.Util.JsonUtil;
 import com.Util.ResponseInfo;
+import com.dao.entity.EmployeeEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by caoxiao on 2017/5/9.
@@ -24,13 +26,17 @@ public class EmployeeController {
 
     @RequestMapping(value = "/getEmployeeList", method = RequestMethod.GET)
     @ResponseBody
-    public String getEmployeeList (@RequestParam String employeeName,
-                                   @RequestParam String company,
-                                   @RequestParam String department,
-                                   @RequestParam String age) {
+    public String getEmployeeList (@RequestParam(required = false) String employeeName,
+                                   @RequestParam(required = false) String company,
+                                   @RequestParam(required = false) String department,
+                                   @RequestParam(required = false) String telNum,
+                                   @RequestParam(required = false) String recruitId) {
         ResponseInfo responseInfo = new ResponseInfo();
+        ObjectMapper mapper = new ObjectMapper();
+        List<EmployeeEntity> resultList = employeeService.getEmployees(employeeName,company,department,telNum,recruitId);
+        ObjectNode objectNode = mapper.createObjectNode();
 
-
+        responseInfo.createSuccessResponse(resultList);
 
         return JsonUtil.toJson(responseInfo);
     }

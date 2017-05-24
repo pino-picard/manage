@@ -28,13 +28,13 @@ app.controller("myNoteCtrl", ['$scope', '$location', "$http", function($scope, $
                 label: "测试部门",
                 children : [
                     {
-                        label : "赵必伟"
+                        label : "赵一"
                     },
                     {
-                        label : "周竞帆"
+                        label : "杨二"
                     },
                     {
-                        label : "小叔叔"
+                        label : "Alice"
                     }
                 ]
             },
@@ -43,7 +43,6 @@ app.controller("myNoteCtrl", ['$scope', '$location', "$http", function($scope, $
                 children: [
                     {
                         label: "基础研发部",
-                        // children: [],
                         children : [
                             {
                                 label : "张三"
@@ -55,8 +54,22 @@ app.controller("myNoteCtrl", ['$scope', '$location', "$http", function($scope, $
                                 label : "王五"
                             }
                         ]
+                    },
+                    {
+                        label: "产品研发部",
+                        children: [
+                            {
+                                label: "ET"
+                            },
+                            {
+                                label: "钱七"
+                            },
+                            {
+                                label: "当归"
+                            }
+                        ]
                     }
-                ],
+                ]
                 // children : [
                 //     {
                 //         label : "AA"

@@ -26,7 +26,7 @@ public class DepartmentEntity implements Serializable{
     @Column(name = "company_id")
     private String companyId;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition="TEXT")
     private String description;
 
     public Long getDepartmentId() {

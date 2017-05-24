@@ -1,0 +1,57 @@
+/**
+ * Created by caoxiao on 2017/5/23.
+ */
+app.controller("roleController", ['$scope', '$location', "$http", function($scope, $location, $http) {
+    $scope.userList = [
+        {
+            "user_id" : "1",
+            "user_name" : "pino",
+            "create_time" : "2017-5-20",
+            "display_name" : "pino",
+            "email" : "pino@hotmail.com",
+            "mobile" : "15210948806",
+            "role_id" : "1",
+            "role_name" : "管理员"
+        },
+        {
+            "user_id" : "2",
+            "user_name" : "pickup",
+            "create_time" : "2017-5-20",
+            "display_name" : "pickup",
+            "email" : "pino@hotmail.com",
+            "mobile" : "15210948806",
+            "role_id" : "1",
+            "role_name" : "管理员"
+        },
+        {
+            "user_id" : "3",
+            "user_name" : "caoxiao",
+            "create_time" : "2017-5-20",
+            "display_name" : "caoxiao",
+            "email" : "pino@hotmail.com",
+            "mobile" : "15210948806",
+            "role_id" : "1",
+            "role_name" : "管理员"
+        },
+        {
+            "user_id" : "4",
+            "user_name" : "shall",
+            "create_time" : "2017-5-20",
+            "display_name" : "shall",
+            "email" : "pino@hotmail.com",
+            "mobile" : "15210948806",
+            "role_id" : "2",
+            "role_name" : "员工"
+        },
+        {
+            "user_id" : "5",
+            "user_name" : "xxx",
+            "create_time" : "2017-5-20",
+            "display_name" : "xxx",
+            "email" : "pino@hotmail.com",
+            "mobile" : "15210948806",
+            "role_id" : "2",
+            "role_name" : "员工"
+        }
+    ]
+}]);

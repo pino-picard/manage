@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by caoxi on 2017/4/28.
@@ -23,8 +24,11 @@ public class RoleEntity implements Serializable {
     @Column(name = "role_name")
     private String roleName;
 
-    @Cascade(value = {CascadeType.ALL})
-    private ArrayList<PrivilegeMapEntity> privileges;
+    @Column(name = "map_id")
+    private String privilege_id;
+
+    @Column(name = "create_time")
+    private Date createTime;
 
     public Long getRoleId() {
         return roleId;
@@ -42,11 +46,19 @@ public class RoleEntity implements Serializable {
         this.roleName = roleName;
     }
 
-    public ArrayList<PrivilegeMapEntity> getPrivileges() {
-        return privileges;
+    public String getPrivilege_id() {
+        return privilege_id;
     }
 
-    public void setPrivileges(ArrayList<PrivilegeMapEntity> privileges) {
-        this.privileges = privileges;
+    public void setPrivilege_id(String privilege_id) {
+        this.privilege_id = privilege_id;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

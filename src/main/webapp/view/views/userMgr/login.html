@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>登录</title>
+        <script src="/manage/npm/jquery/dist/jquery.js"></script>
+        <link href="/manage/view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/manage/view/css/signIn.css" rel="stylesheet">
+        <link href="/manage/view/js/directives/abn_tree.css" rel="stylesheet" type="text/css">
+        <link href="/manage/npm/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/manage/view/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/manage/npm/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/manage/npm/angular/angular.js"></script>
+        <script src="/manage/npm/angular-route/angular-route.js"></script>
+    </head>
+    <body ng-app="manageApp" ng-controller="loginController">
+        <div style="'width:100%'" class="container-fluid">
+            <form class="form-signin">
+                <h2 class="form-signin-heading">登 录</h2>
+                <label for="inputEmail" class="">用户名</label>
+                <input type="text" ng-model="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+                <label for="inputPassword" class="">密码</label>
+                <input type="password" ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> 记住我
+                    </label>
+                </div>
+                <p class="bg-danger" ng-show="errorInfo != ''">{{errorInfo}}</p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click = "login()">登 录</button>
+                <button class="btn btn-lg btn-info btn-block" ng-click = "register()">注 册</button>
+            </form>
+        </div>
+
+        <script src="/manage/view/js/manageApp.js"></script>
+        <script src="/manage/view/js/loginController.js"></script>
+    </body>
+</html>

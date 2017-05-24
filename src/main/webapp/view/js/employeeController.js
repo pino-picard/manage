@@ -83,3 +83,17 @@ app.controller("employeeController", ['$scope', '$location', "$http", function($
         minView: 2
     });
 }]);
+
+app.controller("employeeList", ['$scope', '$location', "$http", function($scope, $location, $http) {
+    $scope.employeeList = [];
+    var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/getEmployeeList";
+
+    $http.get(url).then(
+        function successCallback(response) {
+            $scope.employeeList = response.data.data;
+        },
+        function errorCallback(response) {
+
+        }
+    );
+}]);

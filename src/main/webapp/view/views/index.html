@@ -4,24 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <script src="npm/jquery/dist/jquery.js"></script>
-    <link href="view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="view/js/directives/abn_tree.css" rel="stylesheet" type="text/css"/>
-    <link href="npm/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <title>招聘管理系统</title>
+    <script src="/manage/npm/jquery/dist/jquery.js"></script>
+    <link href="/manage/view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/manage/view/css/uploadFile.css" rel="stylesheet">
+    <link href="/manage/view/js/directives/abn_tree.css" rel="stylesheet" type="text/css">
+    <link href="/manage/npm/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="view/bootstrap/js/bootstrap.min.js"></script>
-    <script src="npm/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="npm/angular/angular.js"></script>
-    <script src="npm/angular-route/angular-route.js"></script>
+    <script src="/manage/view/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/manage/npm/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/manage/npm/angular/angular.js"></script>
+    <script src="/manage/npm/angular-route/angular-route.js"></script>
 </head>
 <body ng-app="manageApp">
     <div style="'width:100%'" class="container-fluid">
         <div class="row clearfix">
-            <div ng-include="'view/component/headbar.html'"></div>
+            <div ng-include="'/manage/view/component/headbar.html'"></div>
         </div>
         <div class="row clearfix">
-            <div ng-include="'view/component/sidebar.html'"></div>
+            <div ng-include="'/manage/view/component/sidebar.html'"></div>
             <!--<div ng-include="'view/component/screen.html'"></div>-->
             <div class="col-lg-10 column">
                 <div ng-view></div>
@@ -29,8 +30,9 @@
         </div>
     </div>
 
-    <script src="view/js/manageApp.js"></script>
-    <script src="view/js/myNoteCtrl.js"></script>
-    <script src="view/js/employeeController.js"></script>
+    <script src="/manage/view/js/manageApp.js"></script>
+    <script src="/manage/view/js/myNoteCtrl.js"></script>
+    <script src="/manage/view/js/employeeController.js"></script>
+    <script src="/manage/view/js/roleController.js"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "pageList": [
+    { "pageName" : "login", "pageNum" : "1"},
+    { "pageName" : "register", "pageNum" : "2"},
+    { "pageName" : "role-list", "pageNum" : "3"},
+    { "pageName" : "user-list", "pageNum" : "4"},
+    { "pageName" : "my-recruit", "pageNum" : "5"},
+    { "pageName" : "recruit-info", "pageNum" : "6"},
+    { "pageName" : "recruit-approval", "pageNum" : "7"},
+    { "pageName" : "recruit-list", "pageNum" : "8"},
+    { "pageName" : "feedback-list", "pageNum" : "9"},
+    { "pageName" : "feedback-info", "pageNum" : "10"},
+    { "pageName" : "employee-list", "pageNum" : "11"},
+    { "pageName" : "employee-info", "pageNum" : "12"}
+  ]
+}

@@ -20,7 +20,7 @@
     </listener>
 
     <welcome-file-list>
-        <welcome-file>/view/views/index.html</welcome-file>
+        <welcome-file>/view/views/userMgr/login.html</welcome-file>
     </welcome-file-list>
 
     <!--定义DispatcherServlet-->
@@ -33,6 +33,10 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
 
     <servlet-mapping>
         <servlet-name>spring-dispatcher</servlet-name>

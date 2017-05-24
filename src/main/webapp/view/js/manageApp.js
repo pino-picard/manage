@@ -6,140 +6,200 @@ var app = angular.module("manageApp", ['ngRoute','angularBootstrapNavTree']);
 app.config(['$routeProvider',function ($routeProvider) {
     $routeProvider
         .when(
-            '/attendance-leave',
+            '/privilege-list',
             {
-                templateUrl:'view/views/attendance/leave.html'
+                templateUrl:'/manage/view/views/userMgr/privilege-list.html'
             }
         )
         .when(
-            '/attendance-leaveApply',
+            '/role-list',
             {
-                templateUrl:'view/views/attendance/leaveApply.html'
+                templateUrl:'/manage/view/views/userMgr/role-list.html'
             }
         )
         .when(
-            '/attendance-leaveApproval',
+            '/user-list',
             {
-                templateUrl:'view/views/attendance/leaveApproval.html'
+                templateUrl:'/manage/view/views/userMgr/user-list.html'
             }
         )
         .when(
-            '/attendance-myLeave',
+            '/employee-info',
             {
-                templateUrl:'view/views/attendance/myLeave.html'
+                templateUrl:'/manage/view/views/employeeMgr/employee-info.html'
             }
         )
         .when(
-            '/office-changeApproval',
+            '/employee-list',
             {
-                templateUrl:'view/views/office/changeApproval.html'
+                templateUrl:'/manage/view/views/employeeMgr/employee-list.html'
             }
         )
         .when(
-            '/office-leaveApproval',
+            '/recruit-info',
             {
-                templateUrl:'view/views/office/leaveApproval.html'
+                templateUrl:'/manage/view/views/recruitmentMgr/recruit-info.html'
             }
         )
         .when(
-            '/office-myRecruitment',
+            '/recruit-list',
             {
-                templateUrl:'view/views/office/myRecruitment.html'
+                templateUrl:'/manage/view/views/recruitmentMgr/recruit-list.html'
             }
         )
         .when(
-            '/office-recruitmentApproval',
+            '/my-recruit',
             {
-                templateUrl:'view/views/office/recruitmentApproval.html'
+                templateUrl:'/manage/view/views/recruitmentMgr/my-recruit.html'
             }
         )
         .when(
-            '/personal-changeApply',
+            '/recruit-approval',
             {
-                templateUrl:'view/views/personal/changeApply.html'
+                templateUrl:'/manage/view/views/recruitmentMgr/recruit-approval.html'
             }
         )
         .when(
-            '/personal-changeApproval',
+            '/feedback-info',
             {
-                templateUrl:'view/views/personal/changeApproval.html'
+                templateUrl:'/manage/view/views/feedBack/feedback-info.html'
             }
         )
         .when(
-            '/personal-employeeChange',
+            '/feedback-list',
             {
-                templateUrl:'view/views/personal/employeeChange.html'
+                templateUrl:'/manage/view/views/feedBack/feedback-list.html'
             }
         )
         .when(
-            '/personal-employeeManage',
+            '/login',
             {
-                templateUrl:'view/views/personal/employeeManage.html'
+                templateUrl:'/manage/view/views/userMgr/login.html'
             }
         )
         .when(
-            '/personal-myChange',
+            '/register',
             {
-                templateUrl:'view/views/personal/myChange.html'
+                templateUrl:'/manage/view/views/userMgr/register.html'
             }
         )
         .when(
-            '/recruitment-allRecruitment',
+            '/index',
             {
-                templateUrl:'view/views/recruitment/allRecruitment.html'
+                templateUrl:'/manage/view/views/index.html'
             }
         )
-        .when(
-            '/recruitment-myRecruitment',
-            {
-                templateUrl:'view/views/recruitment/myRecruitment.html'
-            }
-        )
-        .when(
-            '/recruitment-recruitmentApply',
-            {
-                templateUrl:'view/views/recruitment/recruitmentApply.html'
-            }
-        )
-        .when(
-            '/recruitment-recruitmentApproval',
-            {
-                templateUrl:'view/views/recruitment/recruitmentApproval.html'
-            }
-        )
-        .when(
-            '/system-modelManage',
-            {
-                templateUrl:'view/views/system/modelManage.html'
-            }
-        )
-        .when(
-            '/system-roleManage',
-            {
-                templateUrl:'view/views/system/roleManage.html'
-            }
-        )
-        .when(
-            '/system-systemLog',
-            {
-                templateUrl:'view/views/system/systemLog.html'
-            }
-        )
-        .when(
-            '/system-userManage',
-            {
-                templateUrl:'view/views/system/userManage.html'
-            }
-        )
-        .when(
-            '/employeeInfo',
-            {
-                templateUrl:'view/views/employeeInfo.html'
-            }
-        )
+        // .when(
+        //     '/feedBack-changeApproval',
+        //     {
+        //         templateUrl:'view/views/feedBack/changeApproval.html'
+        //     }
+        // )
+        // .when(
+        //     '/feedBack-leaveApproval',
+        //     {
+        //         templateUrl:'view/views/feedBack/leaveApproval.html'
+        //     }
+        // )
+        // .when(
+        //     '/feedBack-myRecruitment',
+        //     {
+        //         templateUrl:'view/views/feedBack/myRecruitment.html'
+        //     }
+        // )
+        // .when(
+        //     '/feedBack-recruitmentApproval',
+        //     {
+        //         templateUrl:'view/views/feedBack/recruitmentApproval.html'
+        //     }
+        // )
+        // .when(
+        //     '/personal-changeApply',
+        //     {
+        //         templateUrl:'view/views/personal/changeApply.html'
+        //     }
+        // )
+        // .when(
+        //     '/personal-changeApproval',
+        //     {
+        //         templateUrl:'view/views/personal/changeApproval.html'
+        //     }
+        // )
+        // .when(
+        //     '/personal-employeeChange',
+        //     {
+        //         templateUrl:'view/views/personal/employeeChange.html'
+        //     }
+        // )
+        // .when(
+        //     '/personal-employeeManage',
+        //     {
+        //         templateUrl:'view/views/personal/employeeManage.html'
+        //     }
+        // )
+        // .when(
+        //     '/personal-myChange',
+        //     {
+        //         templateUrl:'view/views/personal/myChange.html'
+        //     }
+        // )
+        // .when(
+        //     '/recruitmentMgr-allRecruitment',
+        //     {
+        //         templateUrl:'view/views/recruitmentMgr/allRecruitment.html'
+        //     }
+        // )
+        // .when(
+        //     '/recruitmentMgr-myRecruitment',
+        //     {
+        //         templateUrl:'view/views/recruitmentMgr/myRecruitment.html'
+        //     }
+        // )
+        // .when(
+        //     '/recruitmentMgr-recruitmentApply',
+        //     {
+        //         templateUrl:'view/views/recruitmentMgr/recruitmentApply.html'
+        //     }
+        // )
+        // .when(
+        //     '/recruitmentMgr-recruitmentApproval',
+        //     {
+        //         templateUrl:'view/views/recruitmentMgr/recruitmentApproval.html'
+        //     }
+        // )
+        // .when(
+        //     '/employeeMgr-modelManage',
+        //     {
+        //         templateUrl:'view/views/employeeMgr/modelManage.html'
+        //     }
+        // )
+        // .when(
+        //     '/employeeMgr-roleManage',
+        //     {
+        //         templateUrl:'view/views/employeeMgr/roleManage.html'
+        //     }
+        // )
+        // .when(
+        //     '/employeeMgr-systemLog',
+        //     {
+        //         templateUrl:'view/views/employeeMgr/systemLog.html'
+        //     }
+        // )
+        // .when(
+        //     '/employeeMgr-userManage',
+        //     {
+        //         templateUrl:'view/views/employeeMgr/userManage.html'
+        //     }
+        // )
+        // .when(
+        //     '/employeeInfo',
+        //     {
+        //         templateUrl:'view/views/employeeMgr/employeeInfo.html'
+        //     }
+        // )
         .otherwise(
             {
-                templateUrl:'view/component/screen.html'
+                templateUrl:'/manage/view/component/screen.html'
             }
         );
 }]);
