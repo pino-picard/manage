@@ -2,6 +2,7 @@ package com.dao;
 
 import com.dao.entity.CompanyEntity;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,13 +17,14 @@ import java.util.List;
 @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED)
 public class CompanyDao extends AbstractHibernateDao<CompanyEntity> {
 
+
     public CompanyDao () {
         super(CompanyEntity.class);
     }
 
     public CompanyEntity findCompanyByName (String name) {
         List<CompanyEntity> target;
-        Criteria criteria = openSession().createCriteria(CompanyEntity.class);
+        Criteria criteria = getSession().createCriteria(CompanyEntity.class);
         criteria.add(Restrictions.eq("companyName", name));
         target = criteria.list();
         if (target != null && !target.isEmpty()) {

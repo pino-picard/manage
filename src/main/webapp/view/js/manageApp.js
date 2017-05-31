@@ -1,9 +1,118 @@
 /**
  * Created by caoxiao on 2017/4/6.
  */
-var app = angular.module("manageApp", ['ngRoute','angularBootstrapNavTree']);
+var app = angular.module("manageApp", ['ngRoute','angularBootstrapNavTree','ui.bootstrap']);
+
+var CURRENT_USER = {
+    USER_ID : '',
+    USERNAME : '',
+    ROLE_NAME : '',
+    PRIVILEGES: []
+};
+
+app.service('Session', function () {
+    this.userId = null;
+    this.userName = null;
+    this.userRole = null;
+    this.privileges = null;
+    this.create = function (userId, userName, userRole, privileges) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userRole = userRole;
+        this.privileges = privileges;
+    };
+
+    this.hasPages = function (PageNum) {
+        if (this.privileges != undefined) {
+            this.privileges.forEach(function (page) {
+                if (page.pageNum == PageNum) {
+                    return true;
+                }
+            });
+            return false;
+        }
+        return false;
+    };
+
+    this.destroy = function () {
+        this.userId = null;
+        this.userName = null;
+        this.userRole = null;
+        this.privileges = null;
+    };
+});
+
+app.constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized'
+});
+
+app.run(['$rootScope',function($rootScope){
+    $rootScope.CURRENT_USER = {
+        USER_ID : '',
+        USERNAME : '',
+        ROLE_NAME : '',
+        PRIVILEGES: []
+    };
+}]);
+
+app.factory('AuthService', function ( $location, $http, Session, $rootScope, AUTH_EVENTS, $window) {
+    var authService = {};
+    authService.login = function (credentials) {
+        var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/login";
+
+        $http.post(url,credentials).then(
+            function successCallback(response) {
+                if (response.data.success) {
+                    Session.create(response.data.data.userId, response.data.data.userName, response.data.data.roleName, response.data.data.privileges);
+                    CURRENT_USER.USER_ID = response.data.data.userId;
+                    CURRENT_USER.USERNAME = response.data.data.userName;
+                    CURRENT_USER.ROLE_NAME = response.data.data.roleName;
+                    CURRENT_USER.PRIVILEGES = response.data.data.privileges;
+                    $window.location.href = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/view/views/index.html";
+                } else {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                }
+            },
+            function errorCallback(response) {
+                $scope.errorInfo = response.errorMsg;
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            }
+        );
+    };
+
+    authService.isAuthenticated = function () {
+        return Session.userId == null;
+    };
+
+    authService.isAuthorized = function (authorizedRoles) {
+        if (!angular.isArray(authorizedRoles)) {
+            authorizedRoles = [authorizedRoles];
+        }
+        return (authService.isAuthenticated() &&
+        authorizedRoles.indexOf(Session.userRole) !== -1);
+    };
+
+    return authService;
+});
+
+app.controller('ApplicationController', function ($scope, USER_ROLES, AuthService, $rootScope, Session) {
+    $scope.currentUser = null;
+    $scope.userRoles = USER_ROLES;
+    $scope.isAuthorized = AuthService.isAuthenticated;
+    $rootScope.user = {};
+
+    $scope.setCurrentUser = function (user) {
+        $scope.currentUser = user;
+    };
+})
 
 app.config(['$routeProvider',function ($routeProvider) {
+
     $routeProvider
         .when(
             '/privilege-list',
@@ -33,6 +142,12 @@ app.config(['$routeProvider',function ($routeProvider) {
             '/employee-list',
             {
                 templateUrl:'/manage/view/views/employeeMgr/employee-list.html'
+            }
+        )
+        .when(
+            '/employee-tree',
+            {
+                templateUrl:'/manage/view/views/employeeMgr/employeeTree.html'
             }
         )
         .when(
@@ -89,114 +204,6 @@ app.config(['$routeProvider',function ($routeProvider) {
                 templateUrl:'/manage/view/views/index.html'
             }
         )
-        // .when(
-        //     '/feedBack-changeApproval',
-        //     {
-        //         templateUrl:'view/views/feedBack/changeApproval.html'
-        //     }
-        // )
-        // .when(
-        //     '/feedBack-leaveApproval',
-        //     {
-        //         templateUrl:'view/views/feedBack/leaveApproval.html'
-        //     }
-        // )
-        // .when(
-        //     '/feedBack-myRecruitment',
-        //     {
-        //         templateUrl:'view/views/feedBack/myRecruitment.html'
-        //     }
-        // )
-        // .when(
-        //     '/feedBack-recruitmentApproval',
-        //     {
-        //         templateUrl:'view/views/feedBack/recruitmentApproval.html'
-        //     }
-        // )
-        // .when(
-        //     '/personal-changeApply',
-        //     {
-        //         templateUrl:'view/views/personal/changeApply.html'
-        //     }
-        // )
-        // .when(
-        //     '/personal-changeApproval',
-        //     {
-        //         templateUrl:'view/views/personal/changeApproval.html'
-        //     }
-        // )
-        // .when(
-        //     '/personal-employeeChange',
-        //     {
-        //         templateUrl:'view/views/personal/employeeChange.html'
-        //     }
-        // )
-        // .when(
-        //     '/personal-employeeManage',
-        //     {
-        //         templateUrl:'view/views/personal/employeeManage.html'
-        //     }
-        // )
-        // .when(
-        //     '/personal-myChange',
-        //     {
-        //         templateUrl:'view/views/personal/myChange.html'
-        //     }
-        // )
-        // .when(
-        //     '/recruitmentMgr-allRecruitment',
-        //     {
-        //         templateUrl:'view/views/recruitmentMgr/allRecruitment.html'
-        //     }
-        // )
-        // .when(
-        //     '/recruitmentMgr-myRecruitment',
-        //     {
-        //         templateUrl:'view/views/recruitmentMgr/myRecruitment.html'
-        //     }
-        // )
-        // .when(
-        //     '/recruitmentMgr-recruitmentApply',
-        //     {
-        //         templateUrl:'view/views/recruitmentMgr/recruitmentApply.html'
-        //     }
-        // )
-        // .when(
-        //     '/recruitmentMgr-recruitmentApproval',
-        //     {
-        //         templateUrl:'view/views/recruitmentMgr/recruitmentApproval.html'
-        //     }
-        // )
-        // .when(
-        //     '/employeeMgr-modelManage',
-        //     {
-        //         templateUrl:'view/views/employeeMgr/modelManage.html'
-        //     }
-        // )
-        // .when(
-        //     '/employeeMgr-roleManage',
-        //     {
-        //         templateUrl:'view/views/employeeMgr/roleManage.html'
-        //     }
-        // )
-        // .when(
-        //     '/employeeMgr-systemLog',
-        //     {
-        //         templateUrl:'view/views/employeeMgr/systemLog.html'
-        //     }
-        // )
-        // .when(
-        //     '/employeeMgr-userManage',
-        //     {
-        //         templateUrl:'view/views/employeeMgr/userManage.html'
-        //     }
-        // )
-        // .when(
-        //     '/employeeInfo',
-        //     {
-        //         templateUrl:'view/views/employeeMgr/employeeInfo.html'
-        //     }
-        // )
         .otherwise(
             {
                 templateUrl:'/manage/view/component/screen.html'

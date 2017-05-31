@@ -49,6 +49,14 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
     protected Session openSession() {
         return sessionFactory.openSession();
     }
+
+    public Session getSession() {
+        try {
+            return getCurrentSession();
+        } catch (Exception e) {
+            return openSession();
+        }
+    }
     
     public T get(final String id) {
         Session session = openSession();

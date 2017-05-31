@@ -27,7 +27,11 @@ public class DataConvert {
 
     public String convertDateToString(Date date) {
         String targetDate = null;
-        targetDate = dateFormat.format(date);
+        try {
+            targetDate = dateFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return targetDate;
     }
 

@@ -14,16 +14,17 @@
         <script src="/manage/view/bootstrap/js/bootstrap.min.js"></script>
         <script src="/manage/npm/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
         <script src="/manage/npm/angular/angular.js"></script>
+        <script src="/manage/npm/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
         <script src="/manage/npm/angular-route/angular-route.js"></script>
     </head>
     <body ng-app="manageApp" ng-controller="loginController">
         <div style="'width:100%'" class="container-fluid">
-            <form class="form-signin">
+            <form class="form-signin" >
                 <h2 class="form-signin-heading">登 录</h2>
                 <label for="inputEmail" class="">用户名</label>
-                <input type="text" ng-model="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+                <input type="text" ng-model="credentials.username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
                 <label for="inputPassword" class="">密码</label>
-                <input type="password" ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" ng-model="credentials.password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> 记住我
@@ -31,7 +32,7 @@
                 </div>
                 <p class="bg-danger" ng-show="errorInfo != ''">{{errorInfo}}</p>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click = "login()">登 录</button>
-                <button class="btn btn-lg btn-info btn-block" ng-click = "register()">注 册</button>
+                <button class="btn btn-lg btn-info btn-block" ng-click = "register()" formnovalidate>注 册</button>
             </form>
         </div>
 

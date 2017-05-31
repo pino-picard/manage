@@ -1,7 +1,7 @@
 /**
  * Created by caoxiao on 2017/5/13.
  */
-app.controller("employeeController", ['$scope', '$location', "$http", function($scope, $location, $http) {
+app.controller("employeeController", ['$scope', '$location', "$http", "$rootScope", function($scope, $location, $http, $rootScope, Session) {
     $scope.employee = {};
 
     $scope.email = {
@@ -84,7 +84,7 @@ app.controller("employeeController", ['$scope', '$location', "$http", function($
     });
 }]);
 
-app.controller("employeeList", ['$scope', '$location', "$http", function($scope, $location, $http) {
+app.controller("employeeList", ['$scope', '$location', "$http", "$rootScope", function($scope, $location, $http, $rootScope) {
     $scope.employeeList = [];
     var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/getEmployeeList";
 

@@ -1,0 +1,21 @@
+<div class="col-lg-8 column" ng-controller="companyTreeController">
+    <div class="jumbotron">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li ng-class="isSelect($index)" ng-click="selectCompany($index)" ng-repeat="company in companyList">
+                    <a href="{{$index}}" data-toggle="tab">{{company.label}}</a>
+                </li>
+            </ul>
+            <div class="tab-content" ng-repeat="company in companyList">
+                <div class="tab-pane active" id="{{$index}}" ng-if="company.select">
+                    <p style="padding-top: 20px">
+                        {{company.label}}部门列表:
+                    </p>
+                    <div>
+                        <abn-tree tree-data="company.children" tree-control="my_tree" expand-level="2" icon-leaf="glyphicon glyphicon-user" icon-expand="glyphicon glyphicon-triangle-right" icon-collapse="glyphicon glyphicon-triangle-bottom"></abn-tree>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

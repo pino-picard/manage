@@ -1,16 +1,21 @@
 package com.service;
 
 import com.Util.DataConvert;
+import com.Util.ResponseInfo;
 import com.dao.CompanyDao;
 import com.dao.DepartmentDao;
 import com.dao.EmployeeDao;
 import com.dao.entity.CompanyEntity;
 import com.dao.entity.DepartmentEntity;
 import com.dao.entity.EmployeeEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.model.EmployeeModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,4 +98,49 @@ public class EmployeeService {
     }
 
 
+    public ResponseInfo getEmployeeTree () {
+        ResponseInfo responseInfo = new ResponseInfo();
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode arrayNode = mapper.createArrayNode();
+
+        try {
+            List<EmployeeEntity> EmployeeEntities = employeeDao.get();
+            List<CompanyEntity> CompanyEntities = companyDao.get();
+            List<DepartmentEntity> DepartmentEntities = departmentDao.get();
+
+            for (CompanyEntity company : CompanyEntities) {
+                ObjectNode companyNode = mapper.createObjectNode();
+                ArrayNode comp = mapper.createArrayNode();
+
+                for (DepartmentEntity department : DepartmentEntities) {
+                    if (department.getCompanyId().equals(company.getCompanyId().toString())) {
+                        ObjectNode departNode = mapper.createObjectNode();
+                        ArrayNode depart = mapper.createArrayNode();
+
+                        for (EmployeeEntity employee : EmployeeEntities) {
+                            if (employee.getDepartmentId().equals(department.getDepartmentId().toString())) {
+                                ObjectNode emp = mapper.createObjectNode();
+                                emp.put("label", employee.getEmployeeName());
+                                depart.add(emp);
+                            }
+                        }
+
+                        departNode.put("label", department.getDepartmentName());
+                        departNode.set("children", depart);
+                        comp.add(departNode);
+
+                    }
+                }
+                companyNode.put("label",company.getCompanyName());
+                companyNode.set("children",comp);
+                arrayNode.add(companyNode);
+
+            }
+        } catch (Exception e) {
+            responseInfo.createFailedResponse("", e.getMessage());
+        }
+
+        responseInfo.createSuccessResponse(arrayNode);
+        return  responseInfo;
+    }
 }

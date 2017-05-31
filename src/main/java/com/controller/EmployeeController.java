@@ -24,6 +24,14 @@ public class EmployeeController {
     @Resource
     EmployeeService employeeService;
 
+    @RequestMapping(value = "/getEmployeeTree", method = RequestMethod.GET)
+    @ResponseBody
+    public String getEmployeeTree () {
+        ResponseInfo responseInfo = responseInfo = employeeService.getEmployeeTree();
+
+        return JsonUtil.getJsonStr(responseInfo);
+    }
+
     @RequestMapping(value = "/getEmployeeList", method = RequestMethod.GET)
     @ResponseBody
     public String getEmployeeList (@RequestParam(required = false) String employeeName,
@@ -38,7 +46,7 @@ public class EmployeeController {
 
         responseInfo.createSuccessResponse(resultList);
 
-        return JsonUtil.toJson(responseInfo);
+        return JsonUtil.getJsonStr(responseInfo);
     }
 
     @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
@@ -47,21 +55,21 @@ public class EmployeeController {
         ResponseInfo responseInfo = new ResponseInfo();
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode node = mapper.createArrayNode();
-        ObjectNode test = mapper.createObjectNode();
+        ObjectNode objectNode = mapper.createObjectNode();
 
         EmployeeModel newEmployee;
         try {
             newEmployee = mapper.readValue(requestStr, EmployeeModel.class);
         } catch (IOException e) {
             responseInfo.createFailedResponse("", e.getMessage());
-            return JsonUtil.toJson(responseInfo);
+            return JsonUtil.getJsonStr(responseInfo);
         }
 
         if (newEmployee != null) {
             employeeService.addEmployee(newEmployee);
         }
 
-        return JsonUtil.toJson(responseInfo);
+        return JsonUtil.getJsonStr(responseInfo);
     }
 
     @RequestMapping(value = "/modifyEmployee", method = RequestMethod.POST)
@@ -71,7 +79,7 @@ public class EmployeeController {
 
 
 
-        return JsonUtil.toJson(responseInfo);
+        return JsonUtil.getJsonStr(responseInfo);
     }
 
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.DELETE)
@@ -81,7 +89,7 @@ public class EmployeeController {
 
 
 
-        return JsonUtil.toJson(responseInfo);
+        return JsonUtil.getJsonStr(responseInfo);
     }
 
 }

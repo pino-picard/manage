@@ -21,7 +21,7 @@ public class RoleEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
 
-    @Column(name = "role_name")
+    @Column(name = "role_name", unique = true)
     private String roleName;
 
     @Column(name = "map_id")

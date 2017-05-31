@@ -23,6 +23,6 @@ public class TestController {
         System.out.println(requestBody);
         JSONObject object = new JSONObject();
         object.put("data","Hello Pino!");
-        return JsonUtil.toJson(object);
+        return JsonUtil.getJsonStr(object);
     }
 }

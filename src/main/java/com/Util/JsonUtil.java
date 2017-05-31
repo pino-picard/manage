@@ -1,92 +1,113 @@
 package com.Util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
  * Created by caoxiao on 2017/4/9.
  */
 public class JsonUtil {
-    /**
-     * 对象转换成JSON字符串
-     *
-     * @param obj
-     *            需要转换的对象
-     * @return 对象的string字符
-     */
-    public static String toJson(Object obj) {
-        JSONObject jSONObject = JSONObject.fromObject(obj);
-        return jSONObject.toString();
+    private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+
+    public static String getJsonStr(Map<String, Object> map){
+        String result = "";
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            result = mapper.writeValueAsString(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
-    /**
-     * JSON字符串转换成对象
-     *
-     * @param jsonString
-     *            需要转换的字符串
-     * @param type
-     *            需要转换的对象类型
-     * @return 对象
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T fromJson(String jsonString, Class<T> type) {
-        JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        return (T) JSONObject.toBean(jsonObject, type);
+    public static String getJsonStr(Object object){
+        String result = "";
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            result = mapper.writeValueAsString(object);
+        } catch (Exception e) {
+            logger.error("getJsonStr error, e : " + e.getMessage());
+        }
+        return result;
     }
 
-    /**
-     * 将JSONArray对象转换成list集合
-     *
-     * @param jsonArr
-     * @return
-     */
-    public static List<Object> jsonToList(JSONArray jsonArr) {
-        List<Object> list = new ArrayList<Object>();
-        for (Object obj : jsonArr) {
-            if (obj instanceof JSONArray) {
-                list.add(jsonToList((JSONArray) obj));
-            } else if (obj instanceof JSONObject) {
-                list.add(jsonToMap((JSONObject) obj));
-            } else {
-                list.add(obj);
+    public static final ObjectMapper mapper = new ObjectMapper();
+    public static void sendResponse(HttpServletResponse response, String jsonContent) {
+        if (null == response) {
+            return;
+        }
+
+        PrintWriter pWriter = null; //��ȡд�����
+        try {
+            response.setCharacterEncoding("UTF-8"); //���ñ����ʽ
+            response.setContentType("application/json");   //�������ݸ�ʽ
+
+            pWriter = response.getWriter();
+            pWriter.print(jsonContent); //��json����д������
+            pWriter.flush();
+        } catch (IOException e) {
+            logger.debug("[JsonUtil][sendResponse]:Catch exception {}", e);
+        } finally {
+            if (null != pWriter) {
+                pWriter.close();
             }
         }
-        return list;
+
     }
 
-    /**
-     * 将json字符串转换成map对象
-     *
-     * @param json
-     * @return
-     */
-    public static Map<String, Object> jsonToMap(String json) {
-        JSONObject obj = JSONObject.fromObject(json);
-        return jsonToMap(obj);
-    }
+    public static void sendResponse(HttpServletResponse response, Object beanObject) {
 
-    /**
-     * 将JSONObject转换成map对象
-     *
-     * @param jsonObject
-     * @return
-     */
-    public static Map<String, Object> jsonToMap(JSONObject jsonObject) {
-        Set<?> set = jsonObject.keySet();
-        Map<String, Object> map = new HashMap<String, Object>(set.size());
-        for (Object key : jsonObject.keySet()) {
-            Object value = jsonObject.get(key);
-            if (value instanceof JSONArray) {
-                map.put(key.toString(), jsonToList((JSONArray) value));
-            } else if (value instanceof JSONObject) {
-                map.put(key.toString(), jsonToMap((JSONObject) value));
-            } else {
-                map.put(key.toString(), jsonObject.get(key));
-            }
-
+        try {
+            String jsonContent = mapper.writeValueAsString(beanObject);
+            sendResponse(response, jsonContent);
+        } catch (Exception e) {
+            logger.debug("[JsonUtil][sendResponse]:Catch exception {}", e);
         }
-        return map;
+    }
+
+    public static String getJsonStr(ObjectMapper mapper, ObjectNode map){
+        String resultStr = "";
+        try {
+            resultStr = mapper.writeValueAsString(map);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultStr;
+    }
+
+    /**
+     * 使用泛型方法，把json字符串转换为相应的JavaBean对象。
+     * (1)转换为普通JavaBean：readValue(json,Student.class)
+     * (2)转换为List,如List<Student>,将第二个参数传递为Student
+     * [].class.然后使用Arrays.asList();方法把得到的数组转换为特定类型的List
+     *
+     * @param jsonStr
+     * @param valueType
+     * @return
+     */
+    public static <T> T readValue(String jsonStr, Class<T> valueType) throws Exception {
+
+        return mapper.readValue(jsonStr, valueType);
+    }
+
+    public static <T> T readSafeValue(String jsonStr, Class<T> valueType) {
+        T result = null;
+        try {
+            result = mapper.readValue(jsonStr, valueType);
+        } catch (Exception e) {
+            logger.error("readSafeValue error : " + e.getMessage());
+        }
+
+        return result;
     }
 }

@@ -3,6 +3,7 @@ package com.dao;
 import com.dao.entity.CompanyEntity;
 import com.dao.entity.EmployeeEntity;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -18,18 +19,20 @@ import java.util.List;
 @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED)
 public class EmployeeDao extends AbstractHibernateDao<EmployeeEntity> {
 
+
     public EmployeeDao () {
         super(EmployeeEntity.class);
+
     }
 
     public List<EmployeeEntity> findEmployeeByName (String name) {
-        Criteria criteria = openSession().createCriteria(CompanyEntity.class);
+        Criteria criteria = getSession().createCriteria(CompanyEntity.class);
         criteria.add(Restrictions.eq("companyName", name));
         return criteria.list();
     }
 
     public List<EmployeeEntity> describeEmployee (String employeeName, String companyName, String departmentName, String telNum, String recruitId) {
-        Criteria criteria = openSession().createCriteria(EmployeeEntity.class);
+        Criteria criteria = getSession().createCriteria(EmployeeEntity.class);
         if (employeeName != null) {
             criteria.add(Restrictions.like("employeeName", employeeName, MatchMode.ANYWHERE));
         }
@@ -48,5 +51,4 @@ public class EmployeeDao extends AbstractHibernateDao<EmployeeEntity> {
 
         return criteria.list();
     }
-
 }

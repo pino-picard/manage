@@ -41,6 +41,14 @@ public class UserEntity implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public String getUserName() {
         return userName;
     }

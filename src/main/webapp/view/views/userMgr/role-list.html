@@ -1,44 +1,74 @@
-<div class="col-lg-12 column">
-    <ul class="breadcrumb">
-        <li>
-            <a href="#">角色管理</a>
-        </li>
-        <li class="active">
-            用户管理
-        </li>
-    </ul>
-</div>
-<div class="col-lg-12 column">
-    <div ng-include="'/manage/view/component/searchbar.html'">
-    </div>
-</div>
-<div class="col-md-12 column">
-    <div class="tabbable" id="tabs-92845">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a href="#panel-1" data-toggle="tab">百度</a>
-            </li>
+<div ng-controller="roleController">
+    <div class="col-lg-12 column">
+        <ul class="breadcrumb">
             <li>
-                <a href="#panel-2" data-toggle="tab">阿里</a>
+                <a href="#">角色管理</a>
+            </li>
+            <li class="active">
+                角色管理
             </li>
         </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="panel-1">
-                <p>
-                    百度部门列表.
-                </p>
-                <div>
-                    <abn-tree tree-data="treeData" tree-control="my_tree" expand-level="2" icon-leaf="glyphicon glyphicon-user" icon-expand="glyphicon glyphicon-triangle-right" icon-collapse="glyphicon glyphicon-triangle-bottom"></abn-tree>
-                </div>
-            </div>
-            <div class="tab-pane" id="panel-2">
-                <p>
-                    阿里部门列表.
-                </p>
-                <div>
-                    <abn-tree tree-data="treeData"></abn-tree>
-                </div>
-            </div>
+    </div>
+    <div class="col-lg-12 column" style="padding-bottom: 25px">
+        <button type="button" class="btn btn-primary" ng-if="!isEditing" ng-click="modify()">修 改</button>
+        <button type="button" class="btn btn-success" ng-if="isEditing"  ng-click="save()">保 存</button>
+        <button type="button" class="btn btn-success" ng-if="!isEditing" ng-click="create()">创 建</button>
+        <button type="button" class="btn btn-danger"  ng-if="!isEditing" ng-click="delete()">删 除</button>
+        <button type="button" class="btn btn-warning" ng-if="isEditing"  ng-click="cancel()">取 消</button>
+    </div>
+    <div class="col-lg-3">
+        <div class="list-group">
+            <a class="list-group-item " ng-class="isActive(role)" ng-click="selectRole(role)" ng-repeat="role in roleList">
+                <h5 class="list-group-item-heading">{{role.roleName}}</h5>
+                <p class="list-group-item-text">创建时间：{{role.createTime}}</p>
+            </a>
         </div>
     </div>
+    <div class="col-lg-1 center-block" style="padding-top: 150px; width: 70px ">
+        <div class=" btn-group-vertical" role="group" aria-label="...">
+            <button type="button" style="height: 60px" class="btn btn-info glyphicon glyphicon-chevron-right" ng-disabled="true"></button>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <ul class="list-group" ng-disabled="!isEditing">
+            <li class="list-group-item" ng-click="selectPage(page)" ng-repeat="page in pageList" ng-disabled="!isEditing">
+                <p class="col-lg-10" ng-disabled="!isEditing">{{page.pageCn}}</p>
+                <input type="checkbox" name="pageCheck" ng-checked="page.select" ng-disabled="!isEditing">
+            </li>
+        </ul>
+    </div>
 </div>
+
+<script type="text/ng-template" id="createRole.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">创建角色</h4>
+    </div>
+    <div class="modal-body center-block" style="height: 620px">
+        <div class="row clearfix col-lg-10" style="margin: 0 auto;">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-4 text-right" style="font-size: 16px;margin-top: 5px">角色名称:</label>
+                    <div class="col-lg-8" style="padding-bottom: 20px">
+                        <input type="text" class="form-control" ng-model="roleName" />
+                    </div>
+                    <label class="col-lg-4 text-right" style="font-size: 16px;margin-top: 5px">页面访问权限:</label>
+                    <div class="col-lg-8" style="padding-bottom: 20px">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-click="selectPages(page)" ng-repeat="page in pages" >
+                                <p class="col-lg-10">{{page.pageCn}}</p>
+                                <input type="checkbox" name="pageCheck" ng-checked="page.select">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer" >
+        <div class="col-lg-12 column">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="createRole()">确定</button>
+        </div>
+    </div>
+</script>

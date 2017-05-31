@@ -1,16 +1,63 @@
 {
   "pageList": [
-    { "pageName" : "login", "pageNum" : "1"},
-    { "pageName" : "register", "pageNum" : "2"},
-    { "pageName" : "role-list", "pageNum" : "3"},
-    { "pageName" : "user-list", "pageNum" : "4"},
-    { "pageName" : "my-recruit", "pageNum" : "5"},
-    { "pageName" : "recruit-info", "pageNum" : "6"},
-    { "pageName" : "recruit-approval", "pageNum" : "7"},
-    { "pageName" : "recruit-list", "pageNum" : "8"},
-    { "pageName" : "feedback-list", "pageNum" : "9"},
-    { "pageName" : "feedback-info", "pageNum" : "10"},
-    { "pageName" : "employee-list", "pageNum" : "11"},
-    { "pageName" : "employee-info", "pageNum" : "12"}
+    {
+      "pageName" : "login",
+      "pageCn" : "登录页面",
+      "pageNum" : 1
+    },
+    {
+      "pageName" : "register",
+      "pageCn" : "注册页面",
+      "pageNum" : 2
+    },
+    {
+      "pageName" : "role-list",
+      "pageCn" : "角色列表",
+      "pageNum" : 3
+    },
+    {
+      "pageName" : "user-list",
+      "pageCn" : "用户列表",
+      "pageNum" : 4
+    },
+    {
+      "pageName" : "my-recruit",
+      "pageCn" : "我的招聘",
+      "pageNum" : 5
+    },
+    {
+      "pageName" : "recruit-info",
+      "pageCn" : "招聘信息",
+      "pageNum" : 6
+    },
+    { "pageName" : "recruit-approval",
+      "pageCn" : "招聘审批",
+      "pageNum" : 7
+    },
+    {
+      "pageName" : "recruit-list",
+      "pageCn" : "招聘信息列表",
+      "pageNum" : 8
+    },
+    {
+      "pageName" : "feedback-list",
+      "pageCn" : "反馈列表",
+      "pageNum" : 9
+    },
+    {
+      "pageName" : "feedback-info",
+      "pageCn" : "反馈信息",
+      "pageNum" : 10
+    },
+    {
+      "pageName" : "employee-list",
+      "pageCn" : "应聘者列表",
+      "pageNum" : 11
+    },
+    {
+      "pageName" : "employee-info",
+      "pageCn" : "应聘者信息",
+      "pageNum" : 12
+    }
   ]
 }

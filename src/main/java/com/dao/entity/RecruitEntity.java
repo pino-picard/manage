@@ -49,6 +49,14 @@ public class RecruitEntity implements Serializable {
     @Column(name = "deadline")
     private Date deadline;
 
+    public Long getRecruitId() {
+        return recruitId;
+    }
+
+    public void setRecruitId(Long recruitId) {
+        this.recruitId = recruitId;
+    }
+
     public String getRecruitTitle() {
         return recruitTitle;
     }

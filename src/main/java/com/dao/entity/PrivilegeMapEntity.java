@@ -17,4 +17,20 @@ public class PrivilegeMapEntity implements Serializable {
 
     @Column(name = "page_num")
     private String pageNum;
+
+    public Long getMapId() {
+        return mapId;
+    }
+
+    public void setMapId(Long mapId) {
+        this.mapId = mapId;
+    }
+
+    public String getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(String pageNum) {
+        this.pageNum = pageNum;
+    }
 }

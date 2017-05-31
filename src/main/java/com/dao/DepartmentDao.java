@@ -3,6 +3,7 @@ package com.dao;
 import com.dao.entity.CompanyEntity;
 import com.dao.entity.DepartmentEntity;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,11 +20,12 @@ public class DepartmentDao extends AbstractHibernateDao<DepartmentEntity> {
 
     public DepartmentDao () {
         super(DepartmentEntity.class);
+
     }
 
     public DepartmentEntity findDepartmentByName (String name) {
         List<DepartmentEntity> target;
-        Criteria criteria = openSession().createCriteria(DepartmentEntity.class);
+        Criteria criteria = getSession().createCriteria(DepartmentEntity.class);
         criteria.add(Restrictions.eq("departmentName", name));
         target = criteria.list();
         if (target != null && !target.isEmpty()) {

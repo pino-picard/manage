@@ -1,65 +1,64 @@
-<div class="col-lg-12 column">
-    <ul class="breadcrumb">
-        <li>
-            <a href="#">招聘管理</a>
-        </li>
-        <li class="active">
-            招聘申请
-        </li>
-    </ul>
-</div>
-<div class="col-lg-7 column" ng-controller="">
-    <form class="form-horizontal">
-        <fieldset>
-            <legend>招聘申请</legend>
-        </fieldset>
-        <div class="control-group col-lg-11">
-            <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">标题:</label>
-            <div class="controls col-lg-10">
-                <input type="text" class="form-control" style="margin-top: 5px" placeholder="请输入招聘标题" class="input-xlarge">
-                <p class="help-block"></p>
-            </div>
-        </div>
-        <div class="control-group col-lg-11">
-            <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">岗位要求:</label>
-            <div class="controls col-lg-10">
-                <div class="textarea">
-                    <textarea style="height: 200px; margin-top: 12px; margin-bottom: 6px" class="form-control"> </textarea>
+<div ng-controller="recruitInfoController">
+    <div class="col-lg-12 column">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">招聘管理</a>
+            </li>
+            <li class="active">
+                招聘申请
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-7 column">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>招聘申请</legend>
+            </fieldset>
+            <div class="control-group col-lg-11">
+                <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">标题:</label>
+                <div class="controls col-lg-10">
+                    <input type="text" class="form-control" style="margin-top: 5px" placeholder="请输入招聘标题" class="input-xlarge" ng-model="recInfo.title">
+                    <p class="help-block"></p>
                 </div>
             </div>
-        </div>
-        <div class="control-group col-lg-11">
-            <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">岗位说明:</label>
-            <div class="controls col-lg-10">
-                <div class="textarea">
-                    <textarea style="height: 200px; margin-top: 12px; margin-bottom: 18px" class="form-control"> </textarea>
+            <div class="control-group col-lg-11">
+                <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">招聘原因:</label>
+                <div class="controls col-lg-10">
+                    <div class="textarea">
+                        <textarea style="height: 200px; margin-top: 12px; margin-bottom: 6px" class="form-control" ng-model="recInfo.applyReason"> </textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="control-group col-lg-11">
-            <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">招聘人数:</label>
-            <div class="controls col-lg-4">
-                <input type="number" class="form-control" style="margin-top: 5px" placeholder="" class="input-xlarge">
-                <p class="help-block"></p>
+            <div class="control-group col-lg-11">
+                <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">岗位说明:</label>
+                <div class="controls col-lg-10">
+                    <div class="textarea">
+                        <textarea style="height: 200px; margin-top: 12px; margin-bottom: 18px" class="form-control" ng-model="recInfo.description"> </textarea>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-7"></div>
-        </div>
-        <div class="control-group col-lg-11">
-            <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">审批人:</label>
-            <div class="btn-group col-lg-5">
-                <button class="btn btn-default dropdown-toggle col-lg-3" style="margin-top: 12px" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    请选择
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">张三</a></li>
-                    <li><a href="#">李四</a></li>
-                    <li><a href="#">王五</a></li>
-                </ul>
+            <div class="control-group col-lg-11">
+                <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">截止日期:</label>
+                <div class="controls col-lg-4">
+                    <div class="input-group">
+                        <input type="text" style="font-size: 16px;margin-top: 1px" class="form-control" id="deadline" ng-model="recInfo.deadline">
+                        <div class="input-group-btn" style="margin-top: 12px; margin-bottom: 18px">
+                            <button class="btn btn-default glyphicon glyphicon-calendar deadline"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7"></div>
             </div>
-        </div>
-        <div style="height: 50px"></div>
-        <button type="submit" class="btn btn-primary pull-right btn-lg" ng-click="submitForm()">提交</button>
-        <div style="height: 100px"></div>
-    </form>
+            <div class="control-group col-lg-11">
+                <label class="control-label col-lg-2" style="font-size: 16px;margin-top: 5px">审批人:</label>
+                <div class="btn-group col-lg-5" style="margin-top: 12px; margin-bottom: 18px">
+                    <select class="btn btn-default" ng-init="selectedSearch = approverList[0]" ng-model="selectedApprover" ng-options="approver.user_name for approver in approverList">
+                    </select>
+                </div>
+            </div>
+            <div style="height: 50px"></div>
+            <button type="submit" class="btn btn-primary pull-right btn-lg" ng-click="submit()">提交</button>
+            <div style="height: 100px"></div>
+        </form>
+    </div>
 </div>

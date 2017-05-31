@@ -1,57 +1,242 @@
 /**
- * Created by caoxiao on 2017/5/23.
+ * Created by caoxiao on 2017/5/30.
  */
-app.controller("roleController", ['$scope', '$location', "$http", function($scope, $location, $http) {
-    $scope.userList = [
-        {
-            "user_id" : "1",
-            "user_name" : "pino",
-            "create_time" : "2017-5-20",
-            "display_name" : "pino",
-            "email" : "pino@hotmail.com",
-            "mobile" : "15210948806",
-            "role_id" : "1",
-            "role_name" : "管理员"
+app.controller("roleController", function($scope, $location, $http, $uibModal, $route, $rootScope, Session) {
+    console.log('Session', Session);
+    $scope.roleList = [];
+    $scope.pageList = [];
+    $scope.createList = [];
+    $scope.isEditing = false;
+    $scope.selectedRole = {};
+
+    var getPageList = function () {
+        $http.get("/manage/resources/page.json").success(function(data) {
+            $scope.pageList = data.pageList;
+            angular.forEach($scope.pageList, function(page){
+                page.select = false;
+            });
+            $scope.createList = $scope.pageList;
+        });
+    };
+    getPageList();
+    var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/getRoleList";
+    $http.get(url).then(
+        function successCallback(response) {
+            $scope.roleList = response.data.data;
+            for (var index=0; index < $scope.roleList.length; index++) {
+                $scope.roleList[index].select = false;
+            }
+            $scope.roleList[0].select = true;
+            var purl = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/getPrivilegeInfo?privileges="+ $scope.roleList[0].privileges;
+            $http.get(purl).then(
+                function successCallback(response) {
+                    $scope.currentList = response.data.data;
+                    for (var index=0; index < $scope.currentList.length; index++) {
+                        setPageSelect($scope.currentList[index]);
+                    }
+                },
+                function errorCallback(response) {
+
+                }
+            );
         },
-        {
-            "user_id" : "2",
-            "user_name" : "pickup",
-            "create_time" : "2017-5-20",
-            "display_name" : "pickup",
-            "email" : "pino@hotmail.com",
-            "mobile" : "15210948806",
-            "role_id" : "1",
-            "role_name" : "管理员"
-        },
-        {
-            "user_id" : "3",
-            "user_name" : "caoxiao",
-            "create_time" : "2017-5-20",
-            "display_name" : "caoxiao",
-            "email" : "pino@hotmail.com",
-            "mobile" : "15210948806",
-            "role_id" : "1",
-            "role_name" : "管理员"
-        },
-        {
-            "user_id" : "4",
-            "user_name" : "shall",
-            "create_time" : "2017-5-20",
-            "display_name" : "shall",
-            "email" : "pino@hotmail.com",
-            "mobile" : "15210948806",
-            "role_id" : "2",
-            "role_name" : "员工"
-        },
-        {
-            "user_id" : "5",
-            "user_name" : "xxx",
-            "create_time" : "2017-5-20",
-            "display_name" : "xxx",
-            "email" : "pino@hotmail.com",
-            "mobile" : "15210948806",
-            "role_id" : "2",
-            "role_name" : "员工"
+        function errorCallback(response) {
+
         }
-    ]
-}]);
+    );
+
+    var setPageSelect = function (page) {
+        for (var index=0; index < $scope.pageList.length; index++) {
+            if (page.pageNum == $scope.pageList[index].pageNum) {
+                $scope.pageList[index].select = true;
+            }
+        }
+    };
+
+    $scope.selectPage = function (page) {
+        if ($scope.isEditing) {
+            page.select = !page.select;
+        }
+    };
+
+    $scope.selectRole = function (role) {
+        for (var index=0; index < $scope.roleList.length; index++) {
+            $scope.roleList[index].select = false;
+        }
+        role.select = !role.select;
+        $scope.selectedRole = role;
+        var purl = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/getPrivilegeInfo?privileges="+ role.privileges;
+        $http.get(purl).then(
+            function successCallback(response) {
+                angular.forEach($scope.pageList, function(page){
+                    page.select = false;
+                });
+                $scope.currentList = response.data.data;
+                for (var index=0; index < $scope.currentList.length; index++) {
+                    setPageSelect($scope.currentList[index]);
+                }
+            },
+            function errorCallback(response) {
+
+            }
+        );
+    };
+
+    $scope.isActive = function (role) {
+        return role.select == true ? 'active' : '';
+    };
+
+    $scope.modify = function () {
+        $scope.isEditing = true;
+    };
+
+    $scope.save = function () {
+        $scope.isEditing = false;
+        var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/modifyRole";
+
+        var data = {
+            params : {
+                roleId : $scope.selectedRole.roleId,
+                privilege : getSelectPages()
+            }
+        };
+
+        $http.post(url,'',data).then(
+            function successCallback(response) {
+                $route.reload();
+            },
+            function errorCallback(response) {
+
+            }
+        );
+    };
+
+    $scope.create = function () {
+        $scope.isEditing = false;
+        var modalInstance = $uibModal.open({
+            templateUrl : 'createRole.html',
+            controller : 'createRoleControl',
+            animation : true,
+            size: 'md',
+            resolve: {
+                pages : function () {
+                    return $scope.createList;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.reload();
+        }, function () {
+
+        });
+    };
+
+    $scope.delete = function () {
+        $scope.isEditing = false;
+        var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/deleteRole";
+        var data = {
+            params : {
+                roleId : $scope.selectedRole.roleId
+            }
+        };
+
+        $http.post(url,'',data).then(
+            function successCallback(response) {
+                $route.reload();
+            },
+            function errorCallback(response) {
+
+            }
+        );
+    };
+
+    $scope.cancel = function () {
+        $scope.isEditing = false;
+        $route.reload();
+    };
+
+    var findRoleSelect = function () {
+        $scope.roleList.forEach(function (role) {
+            if (role.select == true) {
+                return role;
+            }
+        });
+    };
+
+    var getSelectPages = function () {
+        var target = '';
+        var isfirst = true;
+        for (var index=0; index < $scope.pageList.length; index++) {
+            if ($scope.pageList[index].select == true) {
+                if (isfirst) {
+                    target += '' + $scope.pageList[index].pageNum;
+                    isfirst = false;
+                } else {
+                    target += ',' + $scope.pageList[index].pageNum;
+                }
+            }
+
+        }
+
+        return target;
+    }
+});
+
+app.controller("createRoleControl", function($scope, $location, $http, $uibModalInstance, pages, $rootScope, Session) {
+    $scope.pages = pages;
+    $scope.roleName = '';
+
+    angular.forEach($scope.pages, function(page){
+        page.select = false;
+    });
+
+    $scope.selectPages = function (page) {
+        page.select = !page.select;
+    };
+    
+    $scope.createRole = function () {
+        var pageStr = getSelectPages();
+        var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + "/manage/createRole";
+
+        var data = {
+            params : {
+                roleName : $scope.roleName,
+                privilege : pageStr
+            }
+        };
+
+        $http.post(url,data).then(
+            function successCallback(response) {
+                alert("创建成功");
+                $scope.close();
+            },
+            function errorCallback(response) {
+
+            }
+        );
+
+    };
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    var getSelectPages = function () {
+        var target = '';
+        var isfirst = true;
+        for (var index=0; index < $scope.pages.length; index++) {
+            if ($scope.pages[index].select == true) {
+                if (isfirst) {
+                    target += '' + $scope.pages[index].pageNum;
+                    isfirst = false;
+                } else {
+                    target += ',' + $scope.pages[index].pageNum;
+                }
+            }
+
+        }
+
+        return target;
+    }
+});
